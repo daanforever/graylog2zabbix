@@ -6,10 +6,9 @@ using namespace std;
 
 namespace dan {
   string env_required(const char* name) {
-    string sname(name);
 
     if (const char* env_p = std::getenv(name)) {
-      LOG_INFO "" << sname << "=" << env_p << endl;     
+      LOG_INFO << name << "=" << env_p;
       return std::string(env_p);
     } else {
       cerr << "[ERROR] No such '" << name << "' environment variable found!" << endl;

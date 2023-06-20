@@ -2,9 +2,16 @@
 #include "dan/env.hpp"
 #include "dan/logger.hpp"
 
-int main() {
+using namespace std;
 
-  LOG_INFO << dan::env_required("SERVER") << std::endl;
+int main() {
+  
+  string zabbix_command = dan::env_required("ZABBIX_COMMAND");
+  string zabbix_server  = dan::env_required("ZABBIX_SERVER");
+  string zabbix_host    = dan::env_required("ZABBIX_HOST");
+  string zabbix_key     = dan::env_required("ZABBIX_KEY");
+  string zabbix_value   = dan::env_required("ZABBIX_VALUE");
+
 
   restinio::run(
       restinio::on_this_thread()
