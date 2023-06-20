@@ -1,0 +1,3 @@
+[submodule "thirdparty/web-server"]
+	path = thirdparty/web-server
+	url = https://gitlab.com/eidheim/Simple-Web-Server.git
