@@ -11,12 +11,14 @@ namespace dan {
 
 int main() {
   
-  string port           = dan::env_required("PORT");
-  string zabbix_command = dan::env_required("ZABBIX_COMMAND");
-  string zabbix_server  = dan::env_required("ZABBIX_SERVER");
-  string zabbix_host    = dan::env_required("ZABBIX_HOST");
-  string zabbix_key     = dan::env_required("ZABBIX_KEY");
-  string zabbix_value   = dan::env_required("ZABBIX_VALUE");
+  string port           = dan::getenv("PORT");
+  string zabbix_command = dan::getenv("ZABBIX_COMMAND");
+  string zabbix_server  = dan::getenv("ZABBIX_SERVER");
+  string zabbix_port    = dan::getenv("ZABBIX_PORT");
+  string zabbix_host    = dan::getenv("ZABBIX_HOST");
+  string zabbix_key     = dan::getenv("ZABBIX_KEY");
+  string zabbix_value   = dan::getenv("ZABBIX_VALUE");
+  string extra_args     = dan::getenv("EXTRA_ARGS", false);
 
   auto sender = [&]() {
     stringstream commandline = {};
@@ -26,9 +28,11 @@ int main() {
 
     commandline << "  " << zabbix_command 
                 << " -z " << zabbix_server
+                << " -p " << zabbix_port
                 << " -s \"" << zabbix_host << "\""
                 << " -k " << zabbix_key
-                << " -o " << zabbix_value;
+                << " -o " << zabbix_value
+                << " " << extra_args;
 
     LOG_DEBUG << commandline.str();
 

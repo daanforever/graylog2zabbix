@@ -5,16 +5,22 @@
 using namespace std;
 
 namespace dan {
-  string env_required(const char* name) {
+  string getenv(const char* name, const bool required) {
 
-    if (const char* env_p = std::getenv(name)) {
-      LOG_INFO << name << "=" << env_p;
-      return std::string(env_p);
+    const char* env = std::getenv(name);
+
+    if (env) {
+      LOG_INFO << name << "=" << env;
     } else {
-      cerr << "[ERROR] No such '" << name << "' environment variable found!" << endl;
-      exit(EXIT_FAILURE);
+      if (required == true) {
+        cerr << "[ERROR] No such '" << name << "' environment variable found!" << endl;
+        exit(EXIT_FAILURE);
+      }
+
+      env = "";
     }
-    
+
+    return env;
   }
 }
 

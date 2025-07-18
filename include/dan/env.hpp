@@ -4,7 +4,7 @@
 #include <string>
 
 namespace dan {
-  std::string env_required(const char* name);
+  std::string getenv(const char* name, const bool required=true);
 }
 
 #endif // DAN_ENV_H
